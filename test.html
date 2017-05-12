@@ -8,139 +8,75 @@
       integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
       crossorigin="anonymous"></script>
 
-    <script src="js/aud.js" charset="utf-8"></script>
+    <!-- <script src="js/aud.js" charset="utf-8"></script> -->
+    <script src="js/main.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.9/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.9/semantic.min.js"></script>
     <link rel="stylesheet" href="css/range.css">
+    <link rel="stylesheet" href="css/master.css">
     <script src="js/range.js" charset="utf-8"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('body').keypress(function(event){
-            $('.keydisp').html(`${Math.floor(oscillator.frequency.value)} hz`)
-          })
-          $('#vol').range({
-              min: 0,
-              max: 1,
-              step:.02,
-              start: .06,
-              onChange: function(value, meta) {
-                  if(meta.triggeredByUser) {
-                    gainNode.gain.value = value;
-                  }
-              }
-          });
-          $('#vol2').range({
-              min: 0,
-              max: 1,
-              step:.02,
-              start: .06,
-              onChange: function(value, meta) {
-                  if(meta.triggeredByUser) {
-                    gainNode2.gain.value = value;
-                  }
-              }
-          });
-          $('#wave').range({
-              min: 0,
-              max: 3,
-              step:1,
-              start:0,
-              onChange: function(value, meta) {
-                  if(meta.triggeredByUser) {
-                    if(value == 0){
-                      oscillator.type = 'sine'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wavdisp').html('∿');
-                    }
-                    if(value == 1){
-                      oscillator.type = 'square'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wavdisp').html('∏');
-                    }
-                    if(value == 2){
-                      oscillator.type = 'sawtooth'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wavdisp').html('⊿');
-                    }
-                    if(value == 3){
-                      oscillator.type = 'triangle'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wavdisp').html('⋀');
-                    }
-                  }
-              }
-          });
-          $('#wave2').range({
-              min: 0,
-              max: 3,
-              step:1,
-              start:0,
-              onChange: function(value, meta) {
-                  if(meta.triggeredByUser) {
-                    if(value == 0){
-                      oscillator2.type = 'sine'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wav2disp').html('∿');
-                    }
-                    if(value == 1){
-                      oscillator2.type = 'square'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wav2disp').html('∏');
-                    }
-                    if(value == 2){
-                      oscillator2.type = 'sawtooth'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wav2disp').html('⊿');
-                    }
-                    if(value == 3){
-                      oscillator2.type = 'triangle'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-                      $('.wav2disp').html('⋀');
-                    }
 
-                  }
-              }
-          });
-          $('#freq').range({
-              min: 20,
-              max: 9000,
-              step:1,
-              start:200,
-              onChange: function(value, meta) {
-                  if(meta.triggeredByUser) {
-
-                    oscillator.frequency.value = value; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-
-                  }
-              }
-          });
-          $('#freq2').range({
-              min: 20,
-              max: 9000,
-              step:1,
-              start:200,
-              onChange: function(value, meta) {
-                  if(meta.triggeredByUser) {
-
-                    oscillator2.frequency.value = value; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-
-                  }
-              }
-          });
-        });
-
-    </script>
   </head>
   <body>
-    <div class="ui grid">
-      <div class="eight wide column">
-        <h3>osc 1</h3>
-        vol<div class="ui range" id="vol"></div>
-        wave<span class="wavdisp"></span><div class="ui range" id="wave"></div>
-        hz [make this a modifier of keyhz + bend]<div class="ui range" id="freq"></div>
-      </div>
-      <div class="eight wide column">
-        <h3>osc 2</h3>
-        vol<div class="ui range" id="vol2"></div>
-        wave<span class="wav2disp"></span><div class="ui range" id="wave2"></div>
-        hz [make this a modifier of keyhz + bend]<div class="ui range" id="freq2"></div>
-      </div>
+    <h1>doom 2 hell on earth</h1>
+    <hr>
+    <h1>osc1</h1>
+    <p>
+        <label for="osc1-type">wave:</label>
+        <select name="osc1-type" id="osc1-type">
+            <option value="triangle" selected>Triangle</option>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select>
+        <label for="osc1-mute">mute:</label>
+        <input type="checkbox" name="osc1-mute" id="osc1-mute" checked="true">
+        <label for="osc1-oct">oct*:</label>
+        <input type="number" name="osc1-oct" value="0" id="osc1-oct" max="3" min="-3">
+        <label for="osc1-vol">vol:</label>
+        <input type="range" name="osc1-vol" id="osc1-vol">
+        <label for="osc1-fine">fine:</label>
+        <input type="range" name="osc1-fine" id="osc1-fine">
+    </p>
+    <h1>osc2</h1>
+    <p>
+        <label for="osc2-type">wave:</label>
+        <select name="osc2-type" id="osc2-type">
+            <option value="triangle" selected>Triangle</option>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select>
+        <label for="osc2-mute">mute:</label>
+        <input type="checkbox" name="osc2-mute" id="osc2-mute" checked="true">
+        <label for="osc2-oct">oct*:</label>
+        <input type="number" name="osc2-oct" value="0" id="osc2-oct" max="3" min="-3">
+        <label for="osc2-vol">vol:</label>
+        <input type="range" name="osc2-vol" id="osc2-vol">
+        <label for="osc2-fine">fine:</label>
+        <input type="range" name="osc2-fine" id="osc2-fine">
+    </p>
+    <h1>osc3</h1>
+    <p>
+        <label for="osc3-wave">wave:</label>
+        <select name="osc3-wave" id="osc3-wave">
+            <option value="triangle" selected>Triangle</option>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select>
+        <label for="osc3-mute">mute:</label>
+        <input type="checkbox" name="osc3-mute" id="osc3-mute" checked="true">
+        <label for="osc3-oct">oct*:</label>
+        <input type="number" name="osc3-oct" value="0" id="osc3-oct" max="3" min="-3">
+        <label for="osc3-vol">vol:</label>
+        <input type="range" name="osc3-vol" id="osc3-vol">
+        <label for="osc3-fine">fine:</label>
+        <input type="range" name="osc3-fine" id="osc3-fine">
+    </p>
 
-      <div class="keydisp">
-
-      </div>
+    <hr>
+    <div id="keyboard">
     </div>
   </body>
 </html>
